@@ -37,5 +37,25 @@ namespace News.Controllers
             return View();
         }
 
+        public ActionResult AddNews()
+        {
+            
+
+            return View();
+        }
+        /// <summary>
+        /// 保存新闻
+        /// </summary>
+        /// <param name="title">新闻标题</param>
+        /// <param name="contect">新闻内容</param>
+        /// <returns></returns>
+        public ActionResult SaveNews(string news_title, string contect)
+        {
+            ViewBag.news_title = news_title;
+            ViewBag.contect = contect;
+            return View();
+        }
+
+
     }
 }
