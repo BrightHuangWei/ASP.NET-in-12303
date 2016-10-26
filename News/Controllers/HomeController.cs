@@ -47,12 +47,12 @@ namespace News.Controllers
         /// 保存新闻
         /// </summary>
         /// <param name="title">新闻标题</param>
-        /// <param name="contect">新闻内容</param>
+        /// <param name="content">新闻内容</param>
         /// <returns></returns>
-        public ActionResult SaveNews(string news_title, string contect)
+        public ActionResult SaveNews(string news_title, string content)
         {
             ViewBag.news_title = news_title;
-            ViewBag.contect = contect;
+            ViewBag.content = content;
             return View();
         }
 
