@@ -49,6 +49,52 @@ namespace News.Controllers
             ViewData.Model = article;
             return View();
         }
+       /// <summary>
+       /// 编辑博文
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns></returns>
+        public ActionResult Edit(int id)
+        {
+            var db = new BlogDatabase();
+            var article = db.BlogArticles.First(o => o.Id == id);
+            ViewData.Model = article;
+            return View();
+        }
+
+        /// <summary>
+        /// 保存博文
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public ActionResult EditSave(int id, string subject, string body)
+        {
+            var db = new BlogDatabase();
+            var article = db.BlogArticles.First(o => o.Id == id);
+            article.Subject = subject;
+            article.Body = body;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// 删除博文
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int id)
+        {
+
+
+
+            var db = new BlogDatabase();
+            var article = db.BlogArticles.First(o => o.Id == id);
+            db.BlogArticles.Remove(article);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 
 }
