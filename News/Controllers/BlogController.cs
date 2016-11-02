@@ -9,15 +9,17 @@ namespace News.Controllers
     public class BlogController : Controller
     {
         // GET: Blog
-        public ActionResult Index()
+        public ActionResult Index( string q)
         {
             var db = new BlogDatabase();
-
             db.Database.CreateIfNotExists();
-
-            var lst = db.BlogArticles.OrderByDescending(o => o.Id).ToList();
-            ViewBag.BlogArticles = lst;
-
+            var lst = db.BlogArticles.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                lst = lst.Where(o => o.Subject.Contains(q));
+            }
+            ViewBag.BlogArticles = lst.OrderByDescending(o => o.Id).ToList();
+            ViewBag.q = q;
             return View();
         }
 
@@ -86,15 +88,13 @@ namespace News.Controllers
         /// <returns></returns>
         public ActionResult Delete(int id)
         {
-
-
-
             var db = new BlogDatabase();
             var article = db.BlogArticles.First(o => o.Id == id);
             db.BlogArticles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        
     }
 
 }
