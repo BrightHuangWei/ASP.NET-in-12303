@@ -1,6 +1,7 @@
 ﻿namespace News
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
     using System.Linq;
 
@@ -56,18 +57,20 @@
         /// <summary>
         /// 标题
         /// </summary>
+        [Required(ErrorMessage = "标题不能为空！")]
+        [StringLength(maximumLength:20,MinimumLength = 2)]
         public string Subject { get; set; }
 
         /// <summary>
         /// 文章内容
         /// </summary>
-
+        [Required(ErrorMessage = "内容不能为空！")]
         public string Body { get; set; }
 
         /// <summary>
         /// 创建时间
         /// </summary>
-
+       
         public DateTime DateCreated { get; set; }
     }
 
