@@ -5,7 +5,34 @@
 
 <h2>Edit</h2>
 
-<form action="/Blog/EditSave" method="post">
+@using (Html.BeginForm("EditSave", "Blog"))
+{
+    <input type="hidden" value="@Model.Id" name="id" />
+    <table class="table table-bordered">
+        <tr>
+            <td>标题：</td>
+            <td>
+                @Html.TextBoxFor(o => o.Subject)
+            </td>
+        </tr>
+        <tr>
+            <td>内容</td>
+            <td>
+                @Html.TextAreaFor(o => o.Body, new { style = "width:600px; max-width:1000px;" })
+                @Html.ValidationMessageFor(o => o.Body)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" class="btn btn-primary">保存</button>
+                <button type="reset" class="btn btn-warning">取消</button>
+            </td>
+        </tr>
+    </table>
+}
+
+@*<form action="/Blog/EditSave" method="post">
     <input type="hidden" value="@Model.Id" name="id" />
     <table class="table table-bordered">
         <tr>
@@ -27,4 +54,4 @@
         </tr>
 
     </table>
-</form>
+</form>*@
